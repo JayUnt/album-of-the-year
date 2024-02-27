@@ -19,6 +19,10 @@
   "packageManager": "npm@10.2.4",
   "workspaces": [
     "apps/*",
-    "packages/*"
-  ]
+    "packages/*",
+    "scraper/*"
+  ],
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
