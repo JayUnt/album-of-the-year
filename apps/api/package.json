@@ -1,0 +1,32 @@
+{
+  "name": "rest-express",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "check-types": "tsc --noemit",
+    "lint": "eslint --ignore-path .gitignore --ext .ts src/ && npm run check-types",
+    "lint:fix": "npm run lint --fix",
+    "migrate:dev": "npx prisma migrate dev"
+  },
+  "dependencies": {
+    "@fastify/type-provider-typebox": "^4.0.0",
+    "@prisma/client": "5.10.2",
+    "@sinclair/typebox": "^0.32.15",
+    "fastify": "^4.26.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.21",
+    "express": "^4.18.3",
+    "nodemon": "^3.1.0",
+    "prisma": "5.10.2",
+    "ts-node": "10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
+}

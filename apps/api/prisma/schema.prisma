@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id    String     @id @default(uuid())
+  email String  @unique
+  name  String?
+  ratings UserAlbumRating[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Artist {
+  id    String     @id @default(uuid())
+  name  String?
+  albums Album[]
+  aotyExternalId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Album {
+  id        String      @id @default(uuid())
+  title     String
+  aotyExternalId String?
+  spotifyUrl String?
+  artist    Artist?    @relation(fields: [artistId], references: [id])
+  artistId  String?
+  ratings UserAlbumRating[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserAlbumRating {
+  rating    Int
+  album     Album    @relation(fields: [albumId], references: [id])
+  albumId   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([albumId, userId])
+}
