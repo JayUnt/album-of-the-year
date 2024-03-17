@@ -1,6 +1,6 @@
 import AlbumRepository from "@/features/album/album.repository";
-import { AlbumsInterface } from "./interfaces/albums.interface";
-import { AlbumInterface } from "./interfaces/album.interface";
+import { AlbumsInterface } from "./types/albums.interface";
+import { AlbumInterface } from "./types/album.interface";
 
 
 export interface GetAllAlbumsResponse {

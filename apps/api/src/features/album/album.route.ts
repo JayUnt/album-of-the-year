@@ -12,9 +12,10 @@ class AlbumRoute implements Routes {
     fastify.route({
       method: 'GET',
       url: this.path,
-      // schema: this.albumController.getAllSchema,
       handler: this.albumController.getAll
     });
+
+
     done();
   }
 }
