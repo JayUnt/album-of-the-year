@@ -39,3 +39,8 @@ yarn-error.log*
 
 # Puppeteer cache
 .cache
+
+.env.local
+.env.development
+.env.staging
+.env.production

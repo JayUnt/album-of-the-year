@@ -9,11 +9,11 @@ class AlbumRoute implements Routes {
   public albumController = new AlbumController();
 
   public initializeRoutes(fastify: FastifyInstance, opts: RouteOptions, done: () => void) {
-
+    console.log('albumController', this.albumController)
     fastify.route({
       method: 'GET',
       url: this.path,
-      schema: this.albumController.getAllSchema,
+      // schema: this.albumController.getAllSchema,
       handler: this.albumController.getAll
     });
     done();

@@ -3,8 +3,11 @@ export interface AlbumInterface {
     title: string;
     aotyExternalId?: string | null;
     spotifyUrl: string | null;
-    // artist    Artist?    @relation(fields: [artistId], references: [id])
-    // artistId  Int?
+    artist?: {
+        id: string;
+        name: string;
+        aotyExternalId: string | null;
+    };
     // ratings UserAlbumRating[]
   
     createdAt: Date;

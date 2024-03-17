@@ -1,38 +1,21 @@
-import { AlbumsInterface } from "@/interfaces/albums.interface";
 import prisma from "@/utils/prisma";
-import { Prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 class AlbumRepository {
-  // public db = prisma;
-
+  #db;
 
   constructor() {
-    console.log('AlbumRepository')
-    // console.log('this.prisma', this.db)
-    console.log('AlbumRepository end')
+    this.#db = new PrismaClient({
+      log: ["warn", "error"],
+    });
   }
 
-  async getAll() {
-    // console.log('this.db', prisma);
-    // return await prisma.album.findMany();
-    return Promise.resolve<AlbumsInterface>([
-      {
-        id: "1",
-        title: "title",
-        aotyExternalId: "aotyExternalId",
-        spotifyUrl: "spotifyUrl",
-        createdAt: new Date(2022, 0, 1),
-        updatedAt: new Date(2022, 0, 2),
+  getAll = async () => {
+    return await this.#db.album.findMany({
+      include: {
+        artist: true,
       },
-      {
-        id: "2",
-        title: "title",
-        aotyExternalId: "aotyExternalId",
-        spotifyUrl: "spotifyUrl",
-        createdAt: new Date(2022, 1, 1),
-        updatedAt: new Date(2022, 1, 2),
-      },
-    ]);
+    });
   }
 
   // async getById(id: string) {

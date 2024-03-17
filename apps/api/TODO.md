@@ -1,4 +1,5 @@
 
+- [ ] access prisma in repo
 - [ ] fastify logs
 - [ ] Move feature code into feature folders
 - [ ] Dependency Injection of controllers, service and repos

@@ -10,34 +10,33 @@ export interface GetAllAlbumsResponse {
 }
 
 class AlbumService {
-  // public albumRepository: AlbumRepository;
+  #albumRepository: AlbumRepository;
 
   constructor() {
-    console.log("AlbumService");
-    // this.albumRepository = new AlbumRepository();
-    console.log("AlbumService end");
+    this.#albumRepository = new AlbumRepository();
   }
 
-  mapAlbumToInterface = (album: any): AlbumInterface => ({
+  #mapAlbumToInterface = (album: any): AlbumInterface => ({
     id: album.id,
     title: album.title,
     aotyExternalId: album.aotyExternalId,
     spotifyUrl: album.spotifyUrl,
-    // artist    Artist?    @relation(fields: [artistId], references: [id])
-    // artistId  Int?
+    artist: album?.artist ? {
+      id: album.artist.id,
+      name: album.artist.name,
+      aotyExternalId: album.artist.aotyExternalId,
+    } : undefined,
     // ratings UserAlbumRating[]
     createdAt: album.createdAt,
     updatedAt: album.updatedAt,
   });
 
-  async getAll(): Promise<AlbumsInterface> {
-    console.log("album.service", "getAll");
-    const albumRepository = new AlbumRepository();
-    // console.log('this.albumRepository', this.albumRepository)
-    return await albumRepository.getAll().then((albums) => {
-      console.log('from repo', albums);
-      return albums.map(this.mapAlbumToInterface);
-    });    
+  #mapAlbumsToInterface = (albums: any[]): AlbumsInterface => {
+    return albums.map(this.#mapAlbumToInterface);
+  }
+
+  getAll = async (): Promise<AlbumsInterface> => {
+    return await this.#albumRepository.getAll().then(this.#mapAlbumsToInterface);
   }
 
   // async getById(id: string): Promise<AlbumInterface | null> {
