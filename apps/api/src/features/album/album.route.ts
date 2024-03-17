@@ -1,5 +1,5 @@
-import AlbumController from '@/controllers/album.controller';
-import { Routes } from '@/interfaces/routes.interface';
+import AlbumController from '@/features/album/album.controller';
+import { Routes } from '@/routes/routes.interface';
 import { FastifyInstance, RouteOptions } from 'fastify';
 
 
@@ -8,8 +8,7 @@ class AlbumRoute implements Routes {
 
   public albumController = new AlbumController();
 
-  public initializeRoutes(fastify: FastifyInstance, opts: RouteOptions, done: () => void) {
-    console.log('albumController', this.albumController)
+  public routes(fastify: FastifyInstance, opts: RouteOptions, done: () => void) {
     fastify.route({
       method: 'GET',
       url: this.path,

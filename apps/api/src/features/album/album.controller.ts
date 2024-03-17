@@ -1,9 +1,7 @@
-import { AlbumsInterface } from "@/interfaces/albums.interface";
-import AlbumService from "@services/album.service";
+import AlbumService from "@/features/album/album.service";
 import { FastifyReply, FastifyRequest, FastifySchema } from "fastify";
 
-import prisma from "@/utils/prisma";
-import { PrismaClient } from "@prisma/client";
+import { AlbumsInterface } from "./interfaces/albums.interface";
 
 export interface GetAllAlbumsResponse {
   data: AlbumsInterface;

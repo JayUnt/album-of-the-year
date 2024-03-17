@@ -28,13 +28,6 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
-      "@config": ["config"],
-      "@interfaces/*": ["interfaces/*"],
-      "@utils/*": ["utils/*"],
-      "@constants/*": ["constants/*"],
-      "@plugins/*": ["plugins/*"],
-      "@components/*": ["components/*"],
-      "@services/*": ["services/*"]
     }
   },
   "include": [
