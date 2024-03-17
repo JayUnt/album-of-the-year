@@ -1,5 +1,7 @@
 /*
-TODO: need to figure out timeout/retry logic
+* TODOS
+* - figure out retry logic
+* - should the genre call put the basic data in the database and then a follow up call to get the rest of the data?
 */
 
 import * as cheerio from "cheerio";
@@ -100,7 +102,10 @@ const scraperObject = {
     console.log(`Navigating to ${pageUrl}...`);
 
     timeStart("page.goto");
-    page.goto(pageUrl);
+    page.goto(pageUrl).catch((err: any) => {
+      // see if timeout, if so retry
+      console.error("Error: ", err);
+    });
     timeEnd("page.goto");
 
     timeStart("page.waitForSelector");
@@ -181,7 +186,7 @@ const scraperObject = {
         console.log(albumData);
 
         await newPage.close();
-        resolve(dataObj);
+        resolve(albumData);
       });
 
     // albums.forEach(async (album) => {
@@ -193,6 +198,8 @@ const scraperObject = {
     // });
 
     let currentPageData = await pagePromise(albums[0]);
+
+      console.log('currentPageData', currentPageData);
 
     console.log("End");
   },
