@@ -2,7 +2,7 @@ import AlbumService from "@/features/album/album.service";
 import { FastifyReply, FastifyRequest, FastifySchema } from "fastify";
 
 import { AlbumsInterface } from "./types/albums.interface";
-// import { log } from "@repo/logger";
+import { log } from "@repo/logger";
 import { AlbumInterface } from "@repo/types";
 
 export interface GetAllAlbumsResponse {
@@ -28,7 +28,7 @@ class AlbumController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<GetAllAlbumsResponse> => {
-    // log("info", "AlbumController.getAll called")
+    log("info", "AlbumController.getAll called")
     const list: AlbumInterface = {
       title: "test",
       id: "test",
