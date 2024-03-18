@@ -44,3 +44,4 @@ yarn-error.log*
 .env.development
 .env.staging
 .env.production
+!packages/database/.env
