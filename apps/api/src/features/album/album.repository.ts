@@ -1,13 +1,10 @@
-import prisma from "@/db/prisma";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@repo/database";
 
 class AlbumRepository {
   #db;
 
   constructor() {
-    this.#db = new PrismaClient({
-      log: ["warn", "error"],
-    });
+    this.#db = prisma
   }
 
   getAll = async () => {
@@ -16,7 +13,7 @@ class AlbumRepository {
         artist: true,
       },
     });
-  }
+  };
 
   // async getById(id: string) {
   //   return await this.db.album.findUnique({
