@@ -1,5 +1,5 @@
 {
-  "name": "@repo/database",
+  "name": "@repo/prisma",
   "version": "0.0.0",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -14,9 +14,9 @@
     "format": "prisma format",
     "db:generate": "prisma generate",
     "lint": "eslint ./src --fix",
-    "prebuild": "npm run generate",
-    "predev": "npm run generate",
-    "studio": "prisma studio"
+    "prebuild": "npm run db:generate",
+    "predev": "npm run db:generate",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.11.0"

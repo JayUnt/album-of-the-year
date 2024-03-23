@@ -22,6 +22,15 @@
     },
     "db:seed": {
       "outputs": []
+    },
+    "db:studio": {
+      "outputs": []
+    },
+    "db:migrate:dev": {
+      "outputs": []
+    },
+    "db:migrate:dev:reset": {
+      "outputs": []
     }
   }
 }

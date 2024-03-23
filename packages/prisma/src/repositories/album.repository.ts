@@ -1,6 +1,6 @@
-import { prisma } from "@repo/database";
+import { prisma } from "@repo/prisma";
 
-class AlbumRepository {
+export class AlbumRepository {
   #db;
 
   constructor() {
@@ -25,5 +25,3 @@ class AlbumRepository {
   //   return await this.db.album.findMany(data);
   // }
 }
-
-export default AlbumRepository;

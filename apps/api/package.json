@@ -22,7 +22,7 @@
     "pino-pretty": "^10.3.1",
     "@repo/logger": "*",
     "@repo/types": "*",
-    "@repo/database": "*"
+    "@repo/services": "*"
   },
   "devDependencies": {
     "@types/node": "^20.11.28",

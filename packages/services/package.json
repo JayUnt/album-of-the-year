@@ -1,0 +1,25 @@
+{
+  "name": "@repo/services",
+  "version": "0.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf .turbo node_modules dist",
+    "dev": "tsup --watch",
+    "lint": "eslint ./src --fix"
+  },
+  "dependencies": {
+    "@repo/prisma": "*",
+    "@repo/types": "*"
+  },
+  "devDependencies": {
+    "config": "*",
+    "eslint": "^8.57.0",
+    "rimraf": "^5.0.5",
+    "tsconfig": "*",
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3"
+  }
+}

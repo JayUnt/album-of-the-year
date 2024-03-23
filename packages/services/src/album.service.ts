@@ -1,7 +1,5 @@
-import AlbumRepository from "@/features/album/album.repository";
-import { AlbumsInterface } from "./types/albums.interface";
-import { AlbumInterface } from "./types/album.interface";
-
+import { AlbumRepository } from "@repo/prisma";
+import { AlbumsInterface, AlbumInterface } from "@repo/types";
 
 export interface GetAllAlbumsResponse {
   message: string;
@@ -9,7 +7,7 @@ export interface GetAllAlbumsResponse {
   data: AlbumsInterface;
 }
 
-class AlbumService {
+export class AlbumService {
   #albumRepository: AlbumRepository;
 
   constructor() {
@@ -21,11 +19,13 @@ class AlbumService {
     title: album.title,
     aotyExternalId: album.aotyExternalId,
     spotifyUrl: album.spotifyUrl,
-    artist: album?.artist ? {
-      id: album.artist.id,
-      name: album.artist.name,
-      aotyExternalId: album.artist.aotyExternalId,
-    } : undefined,
+    artist: album?.artist
+      ? {
+          id: album.artist.id,
+          name: album.artist.name,
+          aotyExternalId: album.artist.aotyExternalId,
+        }
+      : undefined,
     // ratings UserAlbumRating[]
     createdAt: album.createdAt,
     updatedAt: album.updatedAt,
@@ -33,11 +33,13 @@ class AlbumService {
 
   #mapAlbumsToInterface = (albums: any[]): AlbumsInterface => {
     return albums.map(this.#mapAlbumToInterface);
-  }
+  };
 
   getAll = async (): Promise<AlbumsInterface> => {
-    return await this.#albumRepository.getAll().then(this.#mapAlbumsToInterface);
-  }
+    return await this.#albumRepository
+      .getAll()
+      .then(this.#mapAlbumsToInterface);
+  };
 
   // async getById(id: string): Promise<AlbumInterface | null> {
   //   return await this.albumRepository.getById(id).then((album) => {
@@ -70,5 +72,3 @@ class AlbumService {
   //   });
   // }
 }
-
-export default AlbumService;

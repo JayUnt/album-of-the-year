@@ -5,6 +5,7 @@
 */
 
 import * as cheerio from "cheerio";
+import { ArtistInterface } from '@repo/types';
 
 interface Album {
   title: string;

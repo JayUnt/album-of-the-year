@@ -1,4 +1,4 @@
-import { prisma, Prisma } from "./client";
+import { prisma, Prisma } from "../client";
 
 const artistData: Prisma.ArtistCreateInput = {
   name: "Green Day",

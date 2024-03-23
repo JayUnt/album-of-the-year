@@ -1,4 +1,4 @@
-import AlbumService from "@/features/album/album.service";
+import { AlbumService } from "@repo/services";
 import { FastifyReply, FastifyRequest, FastifySchema } from "fastify";
 
 import { AlbumsInterface } from "./types/albums.interface";
