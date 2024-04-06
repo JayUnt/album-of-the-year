@@ -28,14 +28,6 @@ class AlbumController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<GetAllAlbumsResponse> => {
-    log("info", "AlbumController.getAll called")
-    const list: AlbumInterface = {
-      title: "test",
-      id: "test",
-      spotifyUrl: "test",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
     try {
       const albums = await this.#albumService.getAll();
       return reply.code(200).send({ data: { albums } });
@@ -43,6 +35,20 @@ class AlbumController {
       return reply.code(500).send({ message: error });
     }
   };
+
+  getById = async (
+    request: FastifyRequest,
+    reply: FastifyReply
+  ): Promise<void> => {
+    log("info", "AlbumController.getById called")
+    const { id } = request.params as { id: string };
+    try {
+      const album = await this.#albumService.getById(id);
+      return reply.code(200).send({ data: { album } });
+    } catch (error) {
+      return reply.code(500).send({ message: error });
+    }
+  }
 }
 
 export default AlbumController;

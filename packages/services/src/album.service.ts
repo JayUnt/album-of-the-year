@@ -1,11 +1,13 @@
 import { AlbumRepository } from "@repo/prisma";
 import { AlbumsInterface, AlbumInterface } from "@repo/types";
+import { CreateAlbumInterface } from "@repo/types/src/album/album.interface";
 
 export interface GetAllAlbumsResponse {
   message: string;
   token: string;
   data: AlbumsInterface;
 }
+
 
 export class AlbumService {
   #albumRepository: AlbumRepository;
@@ -18,17 +20,22 @@ export class AlbumService {
     id: album.id,
     title: album.title,
     aotyExternalId: album.aotyExternalId,
-    spotifyUrl: album.spotifyUrl,
-    artist: album?.artist
-      ? {
-          id: album.artist.id,
-          name: album.artist.name,
-          aotyExternalId: album.artist.aotyExternalId,
-        }
-      : undefined,
-    // ratings UserAlbumRating[]
+    imageBase64: album.imageBase64,
+    spotifyMusicUrl: album.spotifyMusicUrl,
+    amazonMusicUrl: album.amazonMusicUrl,
+    appleMusicUrl: album.appleMusicUrl,
+    artistId: album.artistId,
+    artist: album.artist ? {
+      id: album.artist.id,
+      name: album.artist.name,
+      aotyExternalId: album.artist.aotyExternalId,
+    } : undefined,
+    releaseDate: album.releaseDate,
     createdAt: album.createdAt,
     updatedAt: album.updatedAt,
+
+    genres: [],
+    // ratings UserAlbumRating[]
   });
 
   #mapAlbumsToInterface = (albums: any[]): AlbumsInterface => {
@@ -41,11 +48,18 @@ export class AlbumService {
       .then(this.#mapAlbumsToInterface);
   };
 
-  // async getById(id: string): Promise<AlbumInterface | null> {
-  //   return await this.albumRepository.getById(id).then((album) => {
-  //     return this.mapAlbumToInterface(album);
-  //   });
-  // }
+  getByMonthAndYear = async (
+    month: number,
+    year: number
+  ): Promise<AlbumsInterface> => {
+    return await this.#albumRepository
+      .getByMonthAndYear(month, year)
+      .then(this.#mapAlbumsToInterface);
+  };
+
+  async getById(id: string): Promise<AlbumInterface | null> {
+    return await this.#albumRepository.getById(id).then(this.#mapAlbumToInterface);
+  }
 
   // async search(data: {
   //   title: string;
@@ -71,4 +85,16 @@ export class AlbumService {
   //     return albums.map(this.mapAlbumToInterface);
   //   });
   // }
+
+  async create(album: CreateAlbumInterface): Promise<AlbumInterface> {
+    return await this.#albumRepository
+      .create(album)
+      .then(this.#mapAlbumToInterface);
+  }
+
+  async update(album: AlbumInterface): Promise<AlbumInterface> {
+    return await this.#albumRepository
+      .update(album)
+      .then(this.#mapAlbumToInterface);
+  }
 }

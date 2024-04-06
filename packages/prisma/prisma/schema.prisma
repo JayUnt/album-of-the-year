@@ -40,7 +40,7 @@ model User {
 
 model Artist {
   id             String  @id @default(uuid())
-  name           String? @unique
+  name           String  @unique
   albums         Album[]
   aotyExternalId String? @unique
 
@@ -52,11 +52,15 @@ model Album {
   id             String            @id @default(uuid())
   title          String
   aotyExternalId String?           @unique
-  spotifyUrl     String?
-  artist         Artist?           @relation(fields: [artistId], references: [id])
-  artistId       String?
+  imageBase64    String?
+  spotifyMusicUrl     String?
+  appleMusicUrl  String?
+  amazonMusicUrl String?
+  artist         Artist           @relation(fields: [artistId], references: [id])
+  artistId       String
   genres         Genre[]
   ratings        UserAlbumRating[]
+  releaseDate    DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -15,6 +15,12 @@ class AlbumRoute implements Routes {
       handler: this.albumController.getAll
     });
 
+    fastify.route({
+      method: 'GET',
+      url: `${this.path}/:id`,
+      handler: this.albumController.getById
+    });
+
 
     done();
   }

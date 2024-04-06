@@ -1,20 +1,28 @@
+import { GenreInterface } from "../genre";
+
+interface AlbumArtistInterface {
+    id: string;
+    name: string;
+    aotyExternalId: string | null;
+}
+
 export interface AlbumInterface {
     id: string;
     title: string;
     aotyExternalId?: string | null;
-    imageUrl: string | null;
-    genre: string;
+    imageBase64?: string | null;
+    genres: GenreInterface[];
     releaseDate: Date;
-    spotifyUrl: string | null;
-    appleMusicLink: string | null;
-    amazonMusicLink: string | null;
-    artist?: {
-        id: string;
-        name: string;
-        aotyExternalId: string | null;
-    };
+    spotifyMusicUrl?: string | null;
+    appleMusicUrl?: string | null;
+    amazonMusicUrl?: string | null;
+    artistId: string;
+    artist?: AlbumArtistInterface;
     // ratings UserAlbumRating[]
-  
+    format?: string | null;
+
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface CreateAlbumInterface extends Omit<AlbumInterface, 'id' | 'createdAt' | 'updatedAt'> {}

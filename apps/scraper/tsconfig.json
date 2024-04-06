@@ -1,14 +1,20 @@
 {
     "compilerOptions": {
-        "target": "es5",                          
-        "module": "commonjs",                    
-        "lib": ["es6"],                     
-        "allowJs": true,
-        "outDir": "build",                          
-        "rootDir": "src",
-        "strict": true,         
-        "noImplicitAny": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true
-      }
+      /* Base Options: */
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "target": "es2022",
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "moduleDetection": "force",
+      "isolatedModules": true,
+      /* Strictness */
+      "strict": true,
+      "noUncheckedIndexedAccess": true,
+      "moduleResolution": "NodeNext",
+      "module": "NodeNext",
+      "outDir": "dist",
+      "sourceMap": true,
+      "lib": ["es2022"]
+    }
   }
