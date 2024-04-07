@@ -1,9 +1,6 @@
 import { GenreService, AlbumService, ArtistService } from "@repo/services";
-import { AlbumInterface, AlbumsInterface, ArtistInterface } from "@repo/types";
-import {
-  GenreAlbumInterface,
-  ScraperService,
-} from "./puppeteer/album-of-the-year/scraper.service";
+import { ArtistInterface } from "@repo/types";
+import { ScraperService } from "./puppeteer/album-of-the-year/scraper.service";
 import {
   ScraperAlbumDetailsInterface,
   ScraperAlbumListInterface,

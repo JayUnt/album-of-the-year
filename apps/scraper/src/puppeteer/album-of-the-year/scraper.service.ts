@@ -1,23 +1,11 @@
-import { AlbumInterface, AlbumsInterface, GenreInterface } from "@repo/types";
+import { GenreInterface } from "@repo/types";
 import { log } from "@repo/logger";
 import { Page } from "puppeteer";
 import * as cheerio from "cheerio";
 
-
 import { createCluster } from "../../puppeteer/cluster";
 import { ScraperAlbumDetailsInterface, ScraperAlbumListInterface } from "../../types";
 import axios from "axios";
-
-export interface GenreAlbumInterface {
-  title: string;
-  aotyExternalId?: string;
-  spotifyUrl?: string;
-  artist: {
-    name: string;
-    aotyExternalId?: string;
-  };
-  genres: GenreInterface[];
-}
 
 export class ScraperService {
   siteCode = "ALBUM_OF_THE_YEAR";

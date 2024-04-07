@@ -23,16 +23,7 @@ export async function createCluster() {
         ],
       },
     });
-
-    // console.log("Opening the browser......");
-    // cluster = await puppeteer.launch({
-    //   headless: true,
-    //   args: [
-    //     "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
-    //     "--disable-features=site-per-process",
-    //   ],
-    // });
-
+    
     return cluster;
   } catch (err) {
     console.log("Could not create a browser instance => : ", err);
