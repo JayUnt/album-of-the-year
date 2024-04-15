@@ -40,25 +40,6 @@ export class ScraperService {
     return `${this.siteBaseUrl}/album/${album.aotyExternalId}`;
   };
 
-  // #scrapeGenrePageTask = async () => {
-  //   return this.#cluster.task(
-  //     async ({ page, data: url }: { page: Page; data: string }) => {
-  //       console.log("page.goto", url);
-  //       await page.goto(url);
-
-  //       // const { hostname } = new URL(url)
-  //       // const { captchas } = await page.findRecaptchas()
-  //       // console.log(`Found ${captchas.length} captcha on ${hostname}`)
-
-  //       await page.waitForSelector("#centerContent");
-  //       const pageContent = await page.content();
-  //       console.log("pageContent", pageContent);
-
-  //       return pageContent;
-  //     }
-  //   );
-  // };
-
   #parseAlbumList = async (
     pageContent: string,
     genre: GenreInterface

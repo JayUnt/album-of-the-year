@@ -9,6 +9,11 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@repo/types": "*",
+    "@repo/utils": "*",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.15",
     "@repo/ui": "*",
     "next": "^14.0.4",
     "puppeteer-core": "^22.2.0",

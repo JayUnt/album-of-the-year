@@ -1,10 +1,11 @@
+import { ArtistInterface } from "../artist";
 import { GenreInterface } from "../genre";
 
-interface AlbumArtistInterface {
-    id: string;
-    name: string;
-    aotyExternalId: string | null;
-}
+// interface AlbumArtistInterface {
+//     id: string;
+//     name: string;
+//     aotyExternalId: string | null;
+// }
 
 export interface AlbumInterface {
     id: string;
@@ -17,7 +18,7 @@ export interface AlbumInterface {
     appleMusicUrl?: string | null;
     amazonMusicUrl?: string | null;
     artistId: string;
-    artist?: AlbumArtistInterface;
+    artist?: ArtistInterface;
     // ratings UserAlbumRating[]
     format?: string | null;
 

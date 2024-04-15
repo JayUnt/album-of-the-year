@@ -1,4 +1,4 @@
-export interface AlbumInterface {
+export interface AlbumResponse {
     id: string;
     title: string;
     aotyExternalId?: string | null;

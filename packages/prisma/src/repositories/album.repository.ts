@@ -42,6 +42,26 @@ export class AlbumRepository {
     return await this.#db.album.findMany(data);
   }
 
+  async getRandom(where: Prisma.AlbumWhereInput) {
+    const totalCount = await this.#db.album.count({
+      where,
+    });
+    const skip = Math.floor(Math.random() * totalCount);
+
+    const albums = await this.#db.album.findMany({
+      take: 1,
+      skip: skip,
+      where,
+      include: this.#includeProps,
+    });
+
+    if(albums.length == 0) {
+      throw new Error('No album found');
+    }
+
+    return albums[0];
+  }
+
   async create(album: CreateAlbumInterface) {
     return await this.#db.album.create({
       data: {
@@ -62,7 +82,6 @@ export class AlbumRepository {
       include: this.#includeProps,
     });
   }
-
 
   update = async (album: AlbumInterface) => {
     return await this.#db.album.update({

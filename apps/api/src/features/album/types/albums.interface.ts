@@ -1,3 +1,3 @@
-import { AlbumInterface } from "./album.interface";
+import { AlbumResponse } from "./album.response";
 
-export interface AlbumsInterface extends Array<AlbumInterface>{}
+export interface AlbumsInterface extends Array<AlbumResponse>{}
