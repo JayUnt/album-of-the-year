@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/app.ts",
   "scripts": {
-    "start": "npm run build && node build/app.js",
-    "dev": "npx nodemon",
+    "start:scraper": "npm run build && node build/app.js",
+    "dev:scraper": "npx nodemon",
     "build": "rimraf ./build && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "gcp-build": "node node_modules/puppeteer/install.js"
