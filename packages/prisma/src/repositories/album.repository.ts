@@ -42,6 +42,17 @@ export class AlbumRepository {
     return await this.#db.album.findMany(data);
   }
 
+  // async getCurrent() {
+  //   return await this.#db.album.findFirst({
+  //     where: {
+  //       releaseDate: {
+  //         lte: new Date(),
+  //       },
+  //     },
+  //     include: this.#includeProps,
+  //   });
+  // }
+
   async getRandom(where: Prisma.AlbumWhereInput) {
     const totalCount = await this.#db.album.count({
       where,
@@ -58,6 +69,10 @@ export class AlbumRepository {
     if(albums.length == 0) {
       throw new Error('No album found');
     }
+
+    const album = albums[0];
+
+    
 
     return albums[0];
   }

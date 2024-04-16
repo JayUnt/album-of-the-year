@@ -38,7 +38,10 @@ server.register(require('fastify-sqlite'), {
   dbFile: './dev.db'
 })
 
-
+server.register(require('@fastify/swagger'))
+server.register(require('@scalar/fastify-api-reference'), {
+  routePrefix: '/docs',  
+})
 
 server.register(initializeRoutes);
 

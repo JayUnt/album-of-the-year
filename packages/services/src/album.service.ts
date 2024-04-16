@@ -77,6 +77,18 @@ export class AlbumService {
       .then(this.#mapAlbumToInterface);
   }
 
+  // async getCurrent(): Promise<AlbumInterface | null> {
+  //   return await this.#albumRepository
+  //     .getCurrent()
+  //     .then((album) => {
+  //       if (!album) {
+  //         throw new Error("No album found");
+  //       }
+  //       return album
+  //     })
+  //     .then(this.#mapAlbumToInterface);
+  // }
+
   async getRandom({
     release,
     genreIds,

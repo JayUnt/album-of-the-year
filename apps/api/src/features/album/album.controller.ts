@@ -8,26 +8,21 @@ export interface GetAllAlbumsResponse {
   data: AlbumInterface[];
 }
 
-export interface GetRandomQueryString {
-  releaseMonth: number;
-  releaseYear: number;
-  genreIds: string[];
-}
 
-export interface IHeaders {
-  "h-Custom": string;
-}
+// export interface IHeaders {
+//   "h-Custom": string;
+// }
 
-export interface GetRandomReply {
-  200: {
-    success: boolean;
-    data: {
-      album: AlbumInterface;
-    };
-  };
-  302: { url: string };
-  "4xx": { error: string };
-}
+// export interface GetRandomReply {
+//   200: {
+//     success: boolean;
+//     data: {
+//       album: AlbumInterface;
+//     };
+//   };
+//   302: { url: string };
+//   "4xx": { error: string };
+// }
 
 class AlbumController {
   #albumService: AlbumService;
@@ -64,8 +59,8 @@ class AlbumController {
     const { id } = request.params as { id: string };
     try {
       const album = await this.#albumService.getById(id);
-      
-      if(!album) {
+
+      if (!album) {
         return reply.code(404).send({ error: "No album found" });
       }
 
@@ -91,13 +86,39 @@ class AlbumController {
     },
   };
 
+  // getCurrent = async (
+  //   request: FastifyRequest,
+  //   reply: FastifyReply
+  // ): Promise<void> => {
+  //   log("info", "AlbumController.getCurrent called");
+  //   try {
+  //     const album = await this.#albumService.getCurrent();
+
+  //     if(!album) {
+  //       return reply.code(404).send({ error: "No album found" });
+  //     }
+
+  //     return reply.code(200).send({ data: { album } });
+  //   } catch (error) {
+  //     return reply.code(500).send({ message: (error as Error).message });
+  //   }
+  // }
+
   getRandom = async (
-    request: FastifyRequest,
+    request: FastifyRequest<{
+      Querystring: {
+        releaseMonth: number;
+        releaseYear: number;
+        genreIds: string[];
+      };
+      // Headers: IHeaders;
+      // Reply: GetRandomReply;
+    }>,
     reply: FastifyReply
   ): Promise<void> => {
     log("info", "AlbumController.getRandom called");
     try {
-      const query = request.query as GetRandomQueryString;
+      const { query } = request;
       const params: GetRandomProps = {};
 
       if (query.releaseMonth && query.releaseYear) {
@@ -113,7 +134,7 @@ class AlbumController {
 
       const album = await this.#albumService.getRandom(params);
 
-      if(!album) {
+      if (!album) {
         return reply.code(404).send({ error: "No album found" });
       }
 
