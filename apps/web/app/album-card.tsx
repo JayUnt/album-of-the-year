@@ -13,8 +13,6 @@ interface AlbumCardProps {
 }
 
 export const AlbumCard = ({ album }: AlbumCardProps) => {
-  console.log(album);
-
   const albumAOYTUrl = getAlbumUrl(album);
   const artistAOYTUrl = album?.artist ? getArtistUrl(album.artist) : null;
 

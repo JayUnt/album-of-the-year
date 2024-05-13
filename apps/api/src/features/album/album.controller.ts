@@ -55,7 +55,6 @@ class AlbumController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<void> => {
-    log("info", "AlbumController.getById called");
     const { id } = request.params as { id: string };
     try {
       const album = await this.#albumService.getById(id);
@@ -116,7 +115,6 @@ class AlbumController {
     }>,
     reply: FastifyReply
   ): Promise<void> => {
-    log("info", "AlbumController.getRandom called");
     try {
       const { query } = request;
       const params: GetRandomProps = {};

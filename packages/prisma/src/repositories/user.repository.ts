@@ -1,3 +1,4 @@
+import { log } from "@repo/logger";
 import { prisma } from "@repo/prisma";
 import { UserInterface, CreateUserInterface } from "@repo/types";
 
@@ -21,6 +22,18 @@ export class UserRepository {
   }
 
   async create(user: CreateUserInterface) {
+    log("UserRepository.create called", user)
+    // Object.entries(user).forEach(([key, value]) => {  
+    //   log('---',key, value)
+    // });
+
+    log({
+      data: {
+        email: user.email,
+        auth0Id: user.auth0Id,
+      },
+    });
+
     return await this.#db.user.create({
       data: {
         email: user.email,
@@ -35,6 +48,20 @@ export class UserRepository {
       data: {
         email: user.email,
         auth0Id: user.auth0Id,
+      },
+    });
+  };
+
+  upsert = async (user: CreateUserInterface) => {
+    return await this.#db.user.upsert({
+      where: { email: user.email },
+      create: {
+          email: user.email,
+          auth0Id: user.auth0Id,
+      },
+      update: {
+          email: user.email,
+          auth0Id: user.auth0Id,
       },
     });
   };

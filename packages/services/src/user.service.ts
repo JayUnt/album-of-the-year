@@ -41,9 +41,9 @@ export class UserService {
       .then(this.#mapUserToInterface);
   }
 
-  async create(user: CreateUserInterface): Promise<UserInterface> {
+  async upsert(user: CreateUserInterface): Promise<UserInterface> {
     return await this.#userRepository
-      .create(user)
+      .upsert(user)
       .then(this.#mapUserToInterface);
   }
 
