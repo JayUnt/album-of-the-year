@@ -4,4 +4,8 @@ export interface UserInterface {
     auth0Id: string;
 }
 
-export interface CreateUserInterface extends Omit<UserInterface, 'id' | 'createdAt' | 'updatedAt'> {}
+export interface CreateUserInterface {
+    id: UserInterface['id'];
+    email: UserInterface['email'];
+    auth0Id: UserInterface['auth0Id'];
+}

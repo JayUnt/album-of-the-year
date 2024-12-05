@@ -26,6 +26,7 @@ export default async function Page(): Promise<JSX.Element> {
       body: JSON.stringify({
         auth0Id: user.sub,
         email: user.email,
+        fard: 'asd'
       }),
     })
       .then((res) => res.json())

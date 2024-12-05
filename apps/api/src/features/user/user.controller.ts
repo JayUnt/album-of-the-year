@@ -18,8 +18,8 @@ class AlbumController {
     const { id } = request.params as { id: string };
     try {
       const user = await this.#userService.getById(id);
-      
-      if(!user) {
+
+      if (!user) {
         return reply.code(404).send({ error: "No user found" });
       }
 
@@ -29,21 +29,28 @@ class AlbumController {
     }
   };
 
-  upsertBodySchema = {
-    type: "object",
-    properties: {
-      email: { type: "string" },
-      auth0Id: { type: "string" },
+  upsertSchema = {
+    body: {
+      type: "object",
+      properties: {
+        email: { type: "string" },
+        auth0Id: { type: "string" },
+      },
+      required: ["email", "auth0Id"],
     },
-    required: ["email", "auth0Id"],
   };
   upsert = async (
     request: FastifyRequest<{
-      Body: CreateUserInterface
+      Body: CreateUserInterface;
     }>,
     reply: FastifyReply
   ): Promise<void> => {
-    log("info", "UserController.upsert called", request.body, typeof request.body); 
+    log(
+      "info",
+      "UserController.upsert called",
+      request.body,
+      typeof request.body
+    );
 
     try {
       const user = await this.#userService.upsert(request.body);
@@ -51,8 +58,7 @@ class AlbumController {
     } catch (error) {
       return reply.code(500).send({ message: (error as Error).message });
     }
-  }
-
+  };
 }
 
 export default AlbumController;

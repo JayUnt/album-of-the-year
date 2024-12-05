@@ -1,6 +1,6 @@
 import { Prisma } from "@repo/prisma";
 import { UserRepository } from "@repo/prisma/src/repositories/user.repository";
-import { UserInterface, CreateUserInterface } from "@repo/types";
+import { UserInterface, CreateUserInterface, AlbumSeenType } from "@repo/types";
 
 export class UserService {
   #userRepository: UserRepository;

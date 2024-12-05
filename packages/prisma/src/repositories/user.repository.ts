@@ -1,6 +1,6 @@
 import { log } from "@repo/logger";
 import { prisma } from "@repo/prisma";
-import { UserInterface, CreateUserInterface } from "@repo/types";
+import { UserInterface, CreateUserInterface, AlbumSeenType } from "@repo/types";
 
 export class UserRepository {
   #db;

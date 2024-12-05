@@ -1,4 +1,4 @@
-import { AlbumService, GetRandomProps } from "@repo/services";
+import { AlbumSeenService, AlbumService, GetRandomProps } from "@repo/services";
 import { FastifyReply, FastifyRequest, FastifySchema } from "fastify";
 
 import { log } from "@repo/logger";
@@ -25,10 +25,12 @@ export interface GetAllAlbumsResponse {
 // }
 
 class AlbumController {
-  #albumService: AlbumService;
+  #service: AlbumService;
+  #albumSeenService: AlbumSeenService;
 
   constructor() {
-    this.#albumService = new AlbumService();
+    this.#service = new AlbumService();
+    this.#albumSeenService = new AlbumSeenService();
   }
 
   /**
@@ -44,7 +46,7 @@ class AlbumController {
     reply: FastifyReply
   ): Promise<GetAllAlbumsResponse> => {
     try {
-      const albums = await this.#albumService.getAll();
+      const albums = await this.#service.getAll();
       return reply.code(200).send({ data: { albums } });
     } catch (error) {
       return reply.code(500).send({ message: (error as Error).message });
@@ -57,11 +59,15 @@ class AlbumController {
   ): Promise<void> => {
     const { id } = request.params as { id: string };
     try {
-      const album = await this.#albumService.getById(id);
+      const album = await this.#service.getById(id);
 
       if (!album) {
         return reply.code(404).send({ error: "No album found" });
       }
+
+      // TODO: get userId from auth
+      // TODO: convert AlbumSeenType to const 
+      this.#albumSeenService.seenAlbum('TODO', album.id, 'random')
 
       return reply.code(200).send({ data: { album } });
     } catch (error) {
@@ -130,7 +136,7 @@ class AlbumController {
         params.genreIds = query.genreIds;
       }
 
-      const album = await this.#albumService.getRandom(params);
+      const album = await this.#service.getRandom(params);
 
       if (!album) {
         return reply.code(404).send({ error: "No album found" });

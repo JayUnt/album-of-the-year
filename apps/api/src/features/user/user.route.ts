@@ -23,9 +23,7 @@ class AlbumRoute implements Routes {
     fastify.put(
       this.path,
       {
-        schema: {
-          body: this.userController.upsertBodySchema,
-        },
+        schema: this.userController.upsertSchema,
       },
       this.userController.upsert
     );
